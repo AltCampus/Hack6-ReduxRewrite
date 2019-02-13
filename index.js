@@ -66,20 +66,48 @@ function createStore(reducer, predefinedState, enhancer){
 	}
 }
 
-var store = createStore(todos,[1,2,3,4,5],null)
+// var store = createStore(todos,[1,2,3,4,5],null)
 
-console.log("getstate", store.getState());
+// console.log("getstate", store.getState());
 
-console.log("dispatch", store.dispatch({
-  type: 'ADD_TODO',
-  text: 'Read the docs'
-}))
+// console.log("dispatch", store.dispatch({
+//   type: 'ADD_TODO',
+//   text: 'Read the docs'
+// }))
 
-store.replaceReducer(todos2);
+// store.replaceReducer(todos2);
 
-console.log("dispatch", store.dispatch({
-  type: 'ADD_TODO',
-  text: 'Read the docs 2'
-}))
+// console.log("dispatch", store.dispatch({
+//   type: 'ADD_TODO',
+//   text: 'Read the docs 2'
+// }))
 
 
+// Apply Middleware
+function applyMiddleware(...middlewares) {
+  return createStore => (reducer, predefinedState, enhancer) => {
+
+    // Initialize store and dispatch
+    const store = createStore(reducer, predefinedState, enhancer);
+    const dispatch = store.dispatch;
+    let chain = [];
+
+    // Clarify applyMiddleware_API, and pass it into each middleware 
+    let applyMiddleware_API = {
+      getState: store.getState(),
+      dispatch: (action) => dispatch(action)
+    }
+
+    // and collect the outputs in chain
+    chain = middlewares.map((middleware) => middleware(applyMiddleware_API));
+
+    // Compose these middlewares, pass dispatch into this composed functions
+    dispatch = compose(...chain)(store.dispatch);
+
+    // and then return store and dispatch
+    return {
+      ...store,
+      dispatch
+    }
+  }
+}
