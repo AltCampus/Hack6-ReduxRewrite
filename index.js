@@ -44,7 +44,16 @@ function todos2(state = [], action) {
   }
 }
 
-
+function counter(state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1
+    case 'DECREMENT':
+      return state - 1
+    default:
+      return state
+  }
+}
 
 
 function createStore(reducer, predefinedState, enhancer){
@@ -83,3 +92,22 @@ console.log("dispatch", store.dispatch({
 }))
 
 
+// CombineReduer Function
+
+const rootReducer  = Redux.combineReducers({todos, todos2})
+console.log('rootreduer',rootReducer)
+
+function combineReducer(reducers) {
+  const reducersKey = Object.keys(reducers)
+  // return function comboReducer(currentState, action) {
+  //   return todos(currentState, action)
+  return function comboReducer(state, action) {
+    reducersKey.forEach(key => {
+      console.log(reducers[key])
+      state[key] = reducers[key](state[key], action)
+    })
+    return state
+  }
+}
+
+console.log(combineReducer({todos, todos2}))
