@@ -1,19 +1,11 @@
-// function todos(state = [], action) {
-//   switch (action.type) {
-//     case 'ADD_TODO':
-//       return state.concat([action.text])
-//     default:
-//       return state
-//   }
-// }
+import createStore from './src/createStore'
+import combineReducers from './src/combineReducers'
+import applyMiddleware from './src/applyMiddleware'
+import compose from './src/compose'
 
-// function todos2(state = [], action) {
-//   switch (action.type) {
-//     case 'ADD_TODO':
-//       console.log("hello")
-//       return state.concat([action.text])
-//     default:
-//       return state
-//   }
-// }
-
+export {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  compose
+}

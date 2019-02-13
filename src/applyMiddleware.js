@@ -1,5 +1,5 @@
 // Apply Middleware
-function applyMiddleware(...middlewares) {
+export default function applyMiddleware(...middlewares) {
   return createStore => (reducer, predefinedState, enhancer) => {
 
     // Initialize store and dispatch

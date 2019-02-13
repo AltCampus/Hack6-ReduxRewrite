@@ -1,4 +1,4 @@
-export default function combinedReducer(reducers) {
+export default function combineReducer(reducers) {
     const reducersKey = Object.keys(reducers)
     
     return function comboReducer(state, action) {
