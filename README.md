@@ -1,35 +1,20 @@
 # Redux - Rewrite
 
-# Implement date-fns
+## Reimplementation of redux in Vanilla JS
 
-Functions to implement using Date Object.
 
-## Get Date Time
+## Module 1: createStore
 
-### now
+Function to create a global store with methods 
 
-It will give you the current datetime
-Example:
+* getState()
+* dispatch()
+* subscribe()
+* replaceReducer()
 
-```js
-now();
-// Wed Feb 13 2019 14:30:02 GMT+0530 (India Standard Time)
-```
 
-### Day of Year
+## Module 2: combineReducer
 
-Gets the day of the year.
+## Module 3: applyMiddleware
 
-```js
-getDayOfYear(new Date());
-// 44
-```
-
-### Day of Week
-
-Gets the day of the week.
-
-```js
-getDay(new Date());
-// 7
-```
+## Module 4: compose
